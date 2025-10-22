@@ -51,7 +51,7 @@ const Navbar = () => {
 
               {user ? (
                 <NavLink
-                  to="/auth"
+                  to="/profile"
                   className="flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-2 shadow-lg border border-orange-100 transition-all duration-300 hover:shadow-xl hover:scale-105 hover:bg-white"
                 >
                   <h2 className="text-xl font-bold text-gray-800 hidden sm:block">
@@ -67,7 +67,7 @@ const Navbar = () => {
                 </NavLink>
               ) : (
                 <NavLink
-                  to="/services"
+                  to="/auth/login"
                   className={`text-xl font-bold px-4 py-2 rounded-xl transition-all duration-300 transform hover:scale-105 bg-blue-600 text-white`}
                 >
                   Login

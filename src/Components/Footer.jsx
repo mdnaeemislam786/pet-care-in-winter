@@ -92,7 +92,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-cyan-100 text-center md:text-left mb-4 md:mb-0">
               <p className="text-lg">
-                &copy; 2024 WarmPaws. All rights reserved.
+                &copy; 2025 WarmPaws. All rights reserved.
               </p>
             </div>
             <div className="flex flex-wrap justify-center gap-6 text-cyan-100">
