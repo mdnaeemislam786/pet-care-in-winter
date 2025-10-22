@@ -1,0 +1,74 @@
+[
+  {
+    "serviceId": 1,
+    "serviceName": "Winter Coat Fitting for Dogs",
+    "providerName": "PawCare Studio",
+    "providerEmail": "info@pawcare.com",
+    "price": 25,
+    "rating": 4.9,
+    "slotsAvailable": 4,
+    "description": "Custom coat fitting and warm outfit options to keep your dog comfortable in the cold.",
+    "image": "./images/img1.jpg",
+    "category": "Clothing"
+  },
+  {
+    "serviceId": 2,
+    "serviceName": "Winter Grooming & Paw Treatment",
+    "providerName": "CozyPets Grooming",
+    "providerEmail": "hello@cozypets.com",
+    "price": 30,
+    "rating": 4.8,
+    "slotsAvailable": 3,
+    "description": "Professional grooming with moisturizing paw balm and winter-safe shampoo.",
+    "image": "./images/img2.jpg",
+    "category": "Grooming"
+  },
+  {
+    "serviceId": 3,
+    "serviceName": "Indoor Warm Bed Setup",
+    "providerName": "Snuggle Pets",
+    "providerEmail": "service@snugglepets.com",
+    "price": 45,
+    "rating": 4.7,
+    "slotsAvailable": 6,
+    "description": "Professional setup of heated pet beds and cozy sleeping areas for winter comfort.",
+    "image": "./images/img3.jpg",
+    "category": "Comfort"
+  },
+  {
+    "serviceId": 4,
+    "serviceName": "Winter Nutrition Consultation",
+    "providerName": "Pet Wellness Hub",
+    "providerEmail": "consult@petwellness.com",
+    "price": 35,
+    "rating": 4.9,
+    "slotsAvailable": 5,
+    "description": "Personalized winter diet plans and nutritional guidance for cold weather energy needs.",
+    "image": "./images/img4.jpg",
+    "category": "Nutrition"
+  },
+  {
+    "serviceId": 5,
+    "serviceName": "Paw Protection Kit Installation",
+    "providerName": "Safe Paws Inc",
+    "providerEmail": "support@safepaws.com",
+    "price": 28,
+    "rating": 4.6,
+    "slotsAvailable": 2,
+    "description": "Complete paw care with protective wax application and booties fitting for snow walks.",
+    "image": "./images/img5.jpg",
+    "category": "Safety"
+  },
+  {
+    "serviceId": 6,
+    "serviceName": "Winter Exercise Routine Plan",
+    "providerName": "Active Pets Gym",
+    "providerEmail": "trainer@activepets.com",
+    "price": 40,
+    "rating": 4.8,
+    "slotsAvailable": 7,
+    "description": "Custom indoor exercise routines and play activities to maintain fitness during winter.",
+    "image": "./images/img6.jpg",
+    "category": "Exercise"
+  }
+]

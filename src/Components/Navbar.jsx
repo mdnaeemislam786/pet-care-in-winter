@@ -6,7 +6,7 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const user = true;
   return (
-    <nav className="navbar bg-gradient-to-r from-[#fdf6f0] via-[#f7d9c4] to-[#e8bfae] shadow-xl sticky top-0 z-50 border-b-2 border-orange-200">
+    <nav className="navbar bg-gradient-to-r from-blue-100 via-white to-cyan-100 shadow-xl sticky top-0 z-50 border-b-2 border-orange-200">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-3">
           {/* Logo Section */}
