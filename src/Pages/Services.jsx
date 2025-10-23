@@ -1,12 +1,13 @@
-import React from 'react';
+import React from "react";
+
+import ServiceCartModal from "../Components/ServiceCartModal";
 
 const Services = () => {
-    return (
-        <div>
-
-            services
-        </div>
-    );
+  return (
+    <>
+      <ServiceCartModal></ServiceCartModal>
+    </>
+  );
 };
 
 export default Services;

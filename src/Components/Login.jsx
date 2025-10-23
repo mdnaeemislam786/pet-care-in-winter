@@ -38,7 +38,7 @@ const Login = () => {
   const handleForgot = (e) =>{
     e.preventDefault()
     const email = emailRef.current.value;
-    console.log(email);
+    // console.log(email);
 
     setError("")
 

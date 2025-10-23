@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router";
 
 const ServiceCart = () => {
   const [services, setServices] = useState([]);
@@ -137,9 +138,9 @@ const ServiceCart = () => {
 
                         {/* Action Buttons */}
                         <div className="flex space-x-3">
-                          <button className="flex-1 bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-3 rounded-xl font-semibold hover:from-cyan-600 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-cyan-500/25">
+                          <Link to="/services" className="flex-1 justify-center items-center text-center bg-gradient-to-r from-cyan-500 to-blue-600 text-white py-3 rounded-xl font-semibold hover:from-cyan-600 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-cyan-500/25">
                             View Details
-                          </button>
+                          </Link>
                         </div>
                       </div>
                     </div>
