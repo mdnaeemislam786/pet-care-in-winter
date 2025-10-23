@@ -1,13 +1,26 @@
-import { useState } from "react";
+import { use, useState } from "react";
+import { AuthContext } from "../Context/AuthContext";
 
 const Profile = () => {
+  const { user, logOutUser } = use(AuthContext);
+
+  const { email, photoURL, displayName, phoneNumber } = user || {};
+
+  const handlelogOutUser = () => {
+    logOutUser()
+      .then()
+      .catch(() => {
+        
+      });
+  };
+  // console.log(user);
+
   const [userData, setUserData] = useState({
-    name: "John Doe",
-    email: "john.doe@example.com",
-    phone: "+1 (555) 123-4567",
-    password: "••••••••",
+    name: displayName,
+    email: email ? email : "Email not added",
+    phone: phoneNumber ? phoneNumber : "Phone Number not added",
     address: "123 Pet Care Street, Dhaka 1212",
-    profilePicture: ""
+    profilePicture: "",
   });
 
   const [isEditing, setIsEditing] = useState(false);
@@ -30,17 +43,12 @@ const Profile = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setTempData(prev => ({
+    setTempData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const defaultProfilePic = (
-    <div className="w-32 h-32 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center text-white text-4xl font-bold shadow-lg">
-      {userData.name.split(' ').map(n => n[0]).join('')}
-    </div>
-  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-cyan-100 py-8 px-4">
@@ -50,7 +58,9 @@ const Profile = () => {
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-600 to-blue-700 bg-clip-text text-transparent mb-4">
             My Profile
           </h1>
-          <p className="text-gray-600 text-lg">Manage your account information and preferences</p>
+          <p className="text-gray-600 text-lg">
+            Manage your account information and preferences
+          </p>
         </div>
 
         {/* Profile Card */}
@@ -60,15 +70,12 @@ const Profile = () => {
             <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
               {/* Profile Picture */}
               <div className="flex-shrink-0">
-                {userData.profilePicture ? (
-                  <img
-                    src={userData.profilePicture}
-                    alt="Profile"
-                    className="w-32 h-32 rounded-full object-cover border-4 border-cyan-200 shadow-lg"
-                  />
-                ) : (
-                  defaultProfilePic
-                )}
+                <img
+                  className="w-full  h-full rounded-full border object-cover transition-transform duration-300 hover:scale-110"
+                  alt="Profile"
+                  src={photoURL}
+                />
+                
                 {isEditing && (
                   <button className="btn btn-sm btn-ghost text-cyan-600 mt-2">
                     Change Photo
@@ -87,7 +94,9 @@ const Profile = () => {
                     className="text-3xl font-bold bg-transparent border-b-2 border-cyan-500 focus:outline-none focus:border-cyan-700 text-gray-800 text-center md:text-left"
                   />
                 ) : (
-                  <h2 className="text-3xl font-bold text-gray-800">{userData.name}</h2>
+                  <h2 className="text-3xl font-bold text-gray-800">
+                    {userData.name}
+                  </h2>
                 )}
                 <p className="text-gray-600 mt-2">Pet Care Enthusiast</p>
                 <div className="flex flex-wrap gap-2 mt-4 justify-center md:justify-start">
@@ -102,7 +111,9 @@ const Profile = () => {
               {/* Email */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text text-gray-700 font-semibold">Email Address</span>
+                  <span className="label-text text-gray-700 font-semibold">
+                    Email Address
+                  </span>
                 </label>
                 {isEditing ? (
                   <input
@@ -113,14 +124,18 @@ const Profile = () => {
                     className="input input-bordered bg-gray-50 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                   />
                 ) : (
-                  <p className="text-gray-800 bg-gray-50 p-3 rounded-lg border border-gray-200">{userData.email}</p>
+                  <p className="text-gray-800 bg-gray-50 p-3 rounded-lg border border-gray-200">
+                    {userData.email}
+                  </p>
                 )}
               </div>
 
               {/* Phone */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text text-gray-700 font-semibold">Phone Number</span>
+                  <span className="label-text text-gray-700 font-semibold">
+                    Phone Number
+                  </span>
                 </label>
                 {isEditing ? (
                   <input
@@ -131,33 +146,19 @@ const Profile = () => {
                     className="input input-bordered bg-gray-50 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                   />
                 ) : (
-                  <p className="text-gray-800 bg-gray-50 p-3 rounded-lg border border-gray-200">{userData.phone}</p>
+                  <p className="text-gray-800 bg-gray-50 p-3 rounded-lg border border-gray-200">
+                    {userData.phone}
+                  </p>
                 )}
               </div>
 
-              {/* Password */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text text-gray-700 font-semibold">Password</span>
-                </label>
-                {isEditing ? (
-                  <input
-                    type="password"
-                    name="password"
-                    value={tempData.password}
-                    onChange={handleChange}
-                    placeholder="Enter new password"
-                    className="input input-bordered bg-gray-50 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
-                  />
-                ) : (
-                  <p className="text-gray-800 bg-gray-50 p-3 rounded-lg border border-gray-200">{userData.password}</p>
-                )}
-              </div>
 
               {/* Address */}
               <div className="form-control md:col-span-2">
                 <label className="label">
-                  <span className="label-text text-gray-700 font-semibold">Address</span>
+                  <span className="label-text text-gray-700 font-semibold">
+                    Address
+                  </span>
                 </label>
                 {isEditing ? (
                   <textarea
@@ -168,13 +169,15 @@ const Profile = () => {
                     className="textarea textarea-bordered bg-gray-50 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500"
                   />
                 ) : (
-                  <p className="text-gray-800 bg-gray-50 p-3 rounded-lg border border-gray-200">{userData.address}</p>
+                  <p className="text-gray-800 bg-gray-50 p-3 rounded-lg border border-gray-200">
+                    {userData.address}
+                  </p>
                 )}
               </div>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-end mt-8 pt-6 border-t border-gray-200">
+            <div className="flex flex-col sm:flex-row gap-4 justify-between mt-8 pt-6 border-t border-gray-200">
               {isEditing ? (
                 <>
                   <button
@@ -198,6 +201,12 @@ const Profile = () => {
                   Edit Profile
                 </button>
               )}
+              <button
+                onClick={handlelogOutUser}
+                className="btn btn-primary bg-gradient-to-r from-red-500 to-yellow-500 border-none hover:from-yellow-600 hover:to-red-500 text-white"
+              >
+                Logout
+              </button>
             </div>
           </div>
         </div>

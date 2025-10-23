@@ -1,6 +1,6 @@
 import { GoogleAuthProvider, sendPasswordResetEmail, signInWithPopup } from "firebase/auth";
 import { use, useRef, useState } from "react";
-import { Link } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { auth } from "../Firebase/Firebase.config";
 import { AuthContext } from "../Context/AuthContext";
 
@@ -10,7 +10,9 @@ const Login = () => {
   const togglePasswordVisibility = () => setPasswordShown((cur) => !cur);
   const [error, setError] = useState("");
   const emailRef = useRef('');
-  const {loginUser} = use(AuthContext)
+  const {loginUser} = use(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const provider = new GoogleAuthProvider();
 
@@ -21,8 +23,9 @@ const Login = () => {
     setError('')
     // signInWithEmailAndPassword(auth, email, password)
     loginUser(email, password)
-    .then((result) =>{
-      console.log(result);
+    .then(() =>{
+      // console.log(result);
+        navigate(location.state || "/");
     })
     .catch((error) =>{
       // console.log(error.message);
@@ -31,8 +34,6 @@ const Login = () => {
     setIsLoading(true);
     setTimeout(() => setIsLoading(false), 1000);
   };
-
-
 
   const handleForgot = (e) =>{
     e.preventDefault()
@@ -54,8 +55,9 @@ const Login = () => {
 
   const handleGoogleLogin= () =>{
     signInWithPopup(auth, provider)
-    .then((result) => {
-      console.log(result);
+    .then(() => {
+        navigate(location.state || "/");
+      // console.log(result);
     }).catch((error) =>{
       // console.log(error.message);
       setError(error.message)
