@@ -1,7 +1,8 @@
-import { createUserWithEmailAndPassword } from "firebase/auth/cordova";
-import { useState } from "react";
+// import { createUserWithEmailAndPassword } from "firebase/auth/cordova";
+import { use, useState } from "react";
 import { Link } from "react-router";
-import { auth } from "../Firebase/Firebase.config";
+// import { auth } from "../Firebase/Firebase.config";
+import { AuthContext } from "../Context/AuthContext";
 
 const SignUp = () => {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -13,14 +14,14 @@ const SignUp = () => {
 
   const [error, setError] = useState("");
 
-  
+  const {createUser} = use(AuthContext)
 
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const firstName = e.target.firstName.value;
-    const lastName = e.target.lastName.value;
+    // const firstName = e.target.firstName.value;
+    // const lastName = e.target.lastName.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
@@ -37,11 +38,11 @@ const SignUp = () => {
       return  setError("Password must include at least 1 uppercase and 1 lowercase letter and 1 number.");
     }
     
-    
-    console.log(firstName, lastName, email, password, confirmPassword);
+    // console.log(firstName, lastName, email, password, confirmPassword);
     
     setError('')
-    createUserWithEmailAndPassword(auth, email, password)
+    // createUserWithEmailAndPassword(auth, email, password)
+    createUser(email, password)
     .then((result) =>{
       console.log(result);
       alert(" Your account creates successfull")

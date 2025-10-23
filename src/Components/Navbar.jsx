@@ -1,10 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import logo from "../assets/logo.png";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../Context/AuthContext";
+import defaultAvatar from "../assets/user-avater.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const user = true;
+  const [hovered, setHovered] = useState(false);
+
+  const { user } = useContext(AuthContext);
+  const { photoURL, displayName } = user || {};
+
+  const photo = photoURL == false ? defaultAvatar : photoURL;
+
+  // console.log(photoURL, displayName);
+  // const user = use(AuthContext)
+  // console.log((user).user.email);
   return (
     <nav className="navbar bg-gradient-to-r from-blue-100 via-white to-cyan-100 shadow-xl sticky top-0 z-50 border-b-2 border-orange-200">
       <div className="container mx-auto px-4">
@@ -53,15 +64,17 @@ const Navbar = () => {
                 <NavLink
                   to="/profile"
                   className="flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-2 shadow-lg border border-orange-100 transition-all duration-300 hover:shadow-xl hover:scale-105 hover:bg-white"
+                  onMouseEnter={() => setHovered(true)}
+                  onMouseLeave={() => setHovered(false)}
                 >
                   <h2 className="text-xl font-bold text-gray-800 hidden sm:block">
-                    My profile
+                    {hovered ? displayName : "My profile"}
                   </h2>
                   <div className="w-12 h-12 rounded-full border-2 border-orange-300 overflow-hidden shadow-md">
                     <img
                       className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                       alt="Profile"
-                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                      src={photo}
                     />
                   </div>
                 </NavLink>
@@ -113,6 +126,33 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden bg-white/95 backdrop-blur-sm rounded-2xl mt-4 p-4 shadow-lg border border-orange-100">
             <div className="flex flex-col space-y-3">
+              {user ? (
+                <div className="border-t border-orange-200 pt-3 mt-2">
+                  <NavLink
+                    to="/profile"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-orange-50 text-gray-800 hover:bg-orange-100 transition-colors"
+                  >
+                    <div className="w-10 h-10 rounded-full border-2 border-orange-300 overflow-hidden">
+                      <img
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                        alt="Profile"
+                        src={photo}
+                      />
+                    </div>
+                    <span className="font-bold">My Profile</span>
+                  </NavLink>
+                </div>
+              ) : (
+                <NavLink
+                  to="/auth/login"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-lg font-bold px-4 py-3 rounded-xl transition-all duration-300 text-center bg-blue-500 hover:bg-cyan-500"
+                >
+                  Login
+                </NavLink>
+              )}
+
               <NavLink
                 to="/"
                 onClick={() => setIsMenuOpen(false)}
@@ -140,23 +180,6 @@ const Navbar = () => {
               >
                 Services
               </NavLink>
-
-              <div className="border-t border-orange-200 pt-3 mt-2">
-                <NavLink
-                  to="/auth"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-orange-50 text-gray-800 hover:bg-orange-100 transition-colors"
-                >
-                  <div className="w-10 h-10 rounded-full border-2 border-orange-300 overflow-hidden">
-                    <img
-                      className="w-full h-full object-cover"
-                      alt="Profile"
-                      src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-                    />
-                  </div>
-                  <span className="font-bold">My Profile</span>
-                </NavLink>
-              </div>
             </div>
           </div>
         )}

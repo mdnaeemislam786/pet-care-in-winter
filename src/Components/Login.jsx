@@ -1,20 +1,26 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
+import { GoogleAuthProvider, sendPasswordResetEmail, signInWithPopup } from "firebase/auth";
+import { use, useRef, useState } from "react";
 import { Link } from "react-router";
 import { auth } from "../Firebase/Firebase.config";
+import { AuthContext } from "../Context/AuthContext";
 
 const Login = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const togglePasswordVisibility = () => setPasswordShown((cur) => !cur);
   const [error, setError] = useState("");
+  const emailRef = useRef('');
+  const {loginUser} = use(AuthContext)
+
+  const provider = new GoogleAuthProvider();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
     setError('')
-    signInWithEmailAndPassword(auth, email, password)
+    // signInWithEmailAndPassword(auth, email, password)
+    loginUser(email, password)
     .then((result) =>{
       console.log(result);
     })
@@ -22,10 +28,40 @@ const Login = () => {
       // console.log(error.message);
       setError(error.message)
     })
-
     setIsLoading(true);
     setTimeout(() => setIsLoading(false), 1000);
   };
+
+
+
+  const handleForgot = (e) =>{
+    e.preventDefault()
+    const email = emailRef.current.value;
+    console.log(email);
+
+    setError("")
+
+    sendPasswordResetEmail(auth, email)
+    .then((result) =>{
+      alert('Please chack your email')
+      console.log(result);
+    })
+    .catch((error) => {
+      setError(error.message)
+    })
+  }
+
+
+  const handleGoogleLogin= () =>{
+    signInWithPopup(auth, provider)
+    .then((result) => {
+      console.log(result);
+    }).catch((error) =>{
+      // console.log(error.message);
+      setError(error.message)
+    })
+
+  }
 
   return (
     <section className="min-h-screen bg-transparent flex items-center justify-center p-8 relative overflow-hidden">
@@ -56,6 +92,7 @@ const Login = () => {
                 </span>
               </label>
               <input
+                ref={emailRef}
                 type="email"
                 name="email"
                 placeholder="Enter your email"
@@ -116,9 +153,9 @@ const Login = () => {
 
             {/* Forgot Password */}
             <div className="text-right">
-              <a href="#" className="text-sm text-cyan-100 hover:text-cyan-100 transition-colors duration-300 hover:underline">
+              <button onClick={handleForgot} type="button" className="text-sm text-cyan-100 hover:text-cyan-100 transition-colors duration-300 hover:underline">
                 Forgot password?
-              </a>
+              </button>
             </div>
 
             {/* Divider */}
@@ -127,6 +164,7 @@ const Login = () => {
             {/* Google Sign In */}
             <button
               type="button"
+              onClick={handleGoogleLogin}
               className="btn btn-outline w-full flex items-center justify-center gap-3 bg-slate-800/50 border-cyan-500/30 text-cyan-200 hover:bg-slate-700/50 hover:border-cyan-400 hover:text-cyan-100 transform hover:scale-105 transition-all duration-300"
             >
               <img
