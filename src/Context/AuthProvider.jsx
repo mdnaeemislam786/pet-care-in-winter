@@ -24,9 +24,6 @@ const AuthProvider = ({ children }) => {
       });
       setUser(result.user);
       return result.user;
-    } catch (error) {
-      console.error("Create user error:", error.message);
-      throw error;
     } finally {
       setLoading(false);
     }
@@ -42,10 +39,8 @@ const AuthProvider = ({ children }) => {
       });
       setUser(auth.currentUser);
       return auth.currentUser;
-    } catch (error) {
-      console.error("Update profile error:", error.message);
-      throw error;
-    } finally {
+    }
+     finally {
       setLoading(false);
     }
   };
@@ -57,10 +52,8 @@ const AuthProvider = ({ children }) => {
       const result = await signInWithEmailAndPassword(auth, email, password);
       setUser(result.user);
       return result.user;
-    } catch (error) {
-      console.error("Login error:", error.message);
-      throw error;
-    } finally {
+    }
+     finally {
       setLoading(false);
     }
   };
@@ -71,10 +64,7 @@ const AuthProvider = ({ children }) => {
     try {
       await signOut(auth);
       setUser(null);
-    } catch (error) {
-      console.error("Logout error:", error.message);
-      throw error;
-    } finally {
+    }finally {
       setLoading(false);
     }
   };
