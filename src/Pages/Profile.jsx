@@ -75,7 +75,7 @@ const Profile = () => {
           </p>
         </div>
 
-        <div className="card bg-white shadow-2xl border border-cyan-200">
+        <div data-aos="fade-right" className="card bg-white shadow-2xl border border-cyan-200">
           <div className="card-body p-8">
             <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
               <div className="flex-shrink-0">
@@ -201,7 +201,7 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+        <div data-aos="fade-left" className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
           <div className="card bg-white shadow-lg border border-cyan-200">
             <div className="card-body text-center">
               <div className="text-3xl text-cyan-500 mb-2">🐕</div>

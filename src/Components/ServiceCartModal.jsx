@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import BookService from './BookService';
+import BookService from "./BookService";
 import { Navigate } from "react-router";
 
 const ServiceCartModal = () => {
@@ -21,7 +21,7 @@ const ServiceCartModal = () => {
       })
       .catch(() => {});
   }, []);
-  
+
   const bookingRef = useRef(null);
   const handleBookNow = () => {
     bookingRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -48,6 +48,7 @@ const ServiceCartModal = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service) => (
             <div
+              data-aos="slide-up"
               key={service.serviceId}
               className="card bg-white shadow-xl border border-cyan-200 hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 cursor-pointer"
               onClick={() => openModal(service)}
@@ -80,9 +81,9 @@ const ServiceCartModal = () => {
           ))}
         </div>
       </div>
-          <div ref={bookingRef} id="booking-section">
-            <BookService/>
-          </div>
+      <div ref={bookingRef} id="booking-section">
+        <BookService />
+      </div>
       {isModalOpen && selectedService && (
         <>
           <div
@@ -193,7 +194,6 @@ const ServiceCartModal = () => {
               </div>
             </div>
           </div>
-
         </>
       )}
     </div>

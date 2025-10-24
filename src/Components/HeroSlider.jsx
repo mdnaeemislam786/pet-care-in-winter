@@ -136,8 +136,8 @@ const HeroSlider = () => {
           className="winter-pet-care-swiper"
         >
           {winterPetCareTips.map((slide) => (
-            <SwiperSlide key={slide.id}>
-              <div className="bg-gradient-to-br from-slate-50  to-blue-50 rounded-4xl shadow-blue-400 border-orange-400 border overflow-hidden">
+            <SwiperSlide  key={slide.id}>
+              <div data-aos="slide-up" className="bg-gradient-to-br from-slate-50  to-blue-50 rounded-4xl shadow-blue-400 border-orange-400 border overflow-hidden">
                 <div className="flex  flex-col lg:flex-row h-full min-h-[500px]">
                   <div
                     style={{

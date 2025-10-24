@@ -12,7 +12,7 @@ const Footer = () => {
         <div className="absolute -bottom-5 right-1/4 w-28 h-28 bg-blue-200 rounded-full blur-2xl opacity-25 animate-pulse"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div data-aos="fade-right" className="container mx-auto px-4 relative z-10">
         {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Company Info */}
@@ -33,7 +33,7 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div className="transform hover:-translate-y-2 transition-transform duration-300">
+          <div data-aos="fade-right" className="transform hover:-translate-y-2 transition-transform duration-300">
             <h4 className="text-xl font-bold bg-gradient-to-r from-cyan-300 to-blue-200 bg-clip-text text-transparent mb-6 pb-3 border-b-2 border-cyan-500/30 inline-block">
               Quick Links
             </h4>
@@ -61,7 +61,7 @@ const Footer = () => {
           </div>
 
           {/* Contact Info */}
-          <div className="transform hover:-translate-y-2 transition-transform duration-300">
+          <div data-aos="slide-up" className="transform hover:-translate-y-2 transition-transform duration-300">
             <h4 className="text-xl font-bold bg-gradient-to-r from-cyan-300 to-blue-200 bg-clip-text text-transparent mb-6 pb-3 border-b-2 border-cyan-500/30 inline-block">
               Contact Info
             </h4>

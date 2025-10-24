@@ -68,7 +68,7 @@ const Login = () => {
   return (
     <section className="min-h-screen bg-transparent flex items-center justify-center p-8 relative overflow-hidden">
 
-      <div className="card w-full max-w-md bg-base-100/80 backdrop-blur-md shadow-2xl border border-cyan-500/20 relative z-10 transform hover:scale-105 transition-all duration-500">
+      <div data-aos="slide-up" className="card w-full max-w-md bg-base-100/80 backdrop-blur-md shadow-2xl border border-cyan-500/20 relative z-10 transform hover:scale-105 transition-all duration-500">
         <div className="card-body bg-gradient-to-tr hover:bg-gradient-to-br  from-blue-200 via-blue-300 to-cyan-300 p-8">
           {/* Animated Header */}
           <div className="text-center mb-8">

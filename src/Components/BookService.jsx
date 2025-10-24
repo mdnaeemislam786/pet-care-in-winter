@@ -15,7 +15,7 @@ const BookService = () => {
   };
 
   return (
-    <div className=" bg-transparent py-12 pb-30 px-4">
+    <div className="  bg-transparent py-12 pb-30 px-4">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-600 to-blue-700 bg-clip-text text-transparent mb-4">
@@ -27,7 +27,7 @@ const BookService = () => {
         </div>
 
         {/* Booking Form */}
-        <div className="card bg-white rounded-2xl shadow-2xl border border-cyan-200">
+        <div data-aos="slide-up" className="card bg-white rounded-2xl shadow-2xl border border-cyan-200">
           <div className="card-body bg-gradient-to-tr hover:bg-gradient-to-br  from-blue-200 via-blue-300 to-cyan-300 delay-150 duration-300 rounded-2xl p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name */}

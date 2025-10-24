@@ -83,6 +83,7 @@ const ServiceCart = () => {
                   .map((service) => (
                     <div
                       key={service.serviceId}
+                      data-aos="slide-up"
                       className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl border border-cyan-200 overflow-hidden hover:shadow-3xl transform hover:-translate-y-2 transition-all duration-500 group"
                     >
                       {/* Service Image*/}

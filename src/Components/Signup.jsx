@@ -82,8 +82,8 @@ const SignUp = () => {
   };
   return (
     <div className="min-h-screen bg-transparent flex items-center justify-center p-8">
-      <div className="card w-full max-w-2xl bg-base-100/90 backdrop-blur-md shadow-2xl border border-cyan-500/20">
-        <div className="card-body bg-gradient-to-tr hover:bg-gradient-to-br  from-blue-200 via-blue-300 to-cyan-300 delay-150 duration-300 p-8">
+      <div data-aos="slide-up" className="card w-full max-w-2xl bg-base-100/90 backdrop-blur-md shadow-2xl border border-cyan-500/20">
+        <div  className="card-body bg-gradient-to-tr hover:bg-gradient-to-br  from-blue-200 via-blue-300 to-cyan-300 delay-150 duration-300 p-8">
           {/* Header */}
           <div className="text-center mb-8">
             <div className="w-20 h-20 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
