@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, sendPasswordResetEmail, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider,  signInWithPopup } from "firebase/auth";
 import { use, useRef, useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { auth } from "../Firebase/Firebase.config";
@@ -37,19 +37,7 @@ const Login = () => {
 
   const handleForgot = (e) =>{
     e.preventDefault()
-    const email = emailRef.current.value;
-    // console.log(email);
-
-    setError("")
-
-    sendPasswordResetEmail(auth, email)
-    .then((result) =>{
-      alert('Please chack your email')
-      console.log(result);
-    })
-    .catch((error) => {
-      setError(error.message)
-    })
+    navigate("/auth/forgot-password")
   }
 
 
