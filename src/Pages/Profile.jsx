@@ -1,20 +1,14 @@
 import { use, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { toast } from "react-toastify";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { auth } from "../Firebase/Firebase.config";
+import { FaCross, FaEdit, FaSave, FaSignOutAlt } from "react-icons/fa";
+import { FaX } from "react-icons/fa6";
 
 const Profile = () => {
   const { user, logOutUser, updateProfileUser } = use(AuthContext);
   const { email, photoURL, displayName, phoneNumber } = user || {};
-
-  const handlelogOutUser = () => {
-    logOutUser()
-      .then(() => {
-        toast.success("Logout Successful");
-      })
-      .catch((error) => {
-        toast.error("Logout not Successful" + error.message);
-      });
-  };
 
   const [userData, setUserData] = useState({
     name: displayName || "User Name",
@@ -29,6 +23,16 @@ const Profile = () => {
   const handleEdit = () => {
     setTempData({ ...userData });
     setIsEditing(true);
+  };
+
+  const handlelogOutUser = () => {
+    logOutUser()
+      .then(() => {
+        toast.success("Logout Successful");
+      })
+      .catch((error) => {
+        toast.error("Logout not Successful" + error.message);
+      });
   };
 
   const handleSave = () => {
@@ -64,6 +68,16 @@ const Profile = () => {
     }));
   };
 
+  const hendleForgotPassword = () => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        toast.success("Password reset email sent! Please check your inbox.");
+        window.open("https://mail.google.com", "_blank");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-cyan-100 py-8 px-4">
       <div className="max-w-4xl mx-auto">
@@ -76,7 +90,10 @@ const Profile = () => {
           </p>
         </div>
 
-        <div data-aos="fade-right" className="card bg-white shadow-2xl border border-cyan-200">
+        <div
+          data-aos="fade-right"
+          className="card bg-white shadow-2xl border border-cyan-200"
+        >
           <div className="card-body p-8">
             <div className="flex flex-col md:flex-row items-center gap-8 mb-8">
               <div className="flex-shrink-0">
@@ -129,6 +146,12 @@ const Profile = () => {
                 <div className="flex flex-wrap gap-2 mt-4 justify-center md:justify-start">
                   <span className="badge badge-cyan">Premium Member</span>
                   <span className="badge badge-blue">Pet Owner</span>
+                  <button
+                    onClick={hendleForgotPassword}
+                    className="badge badge-blue bg-blue-300 hover:bg-blue-500 text-black font-bold"
+                  >
+                    Forgot password
+                  </button>
                 </div>
               </div>
             </div>
@@ -173,15 +196,17 @@ const Profile = () => {
                 <>
                   <button
                     onClick={handleCancel}
-                    className="btn btn-outline btn-gray flex-1 sm:flex-none"
+                    className="btn bg-red-600 text-white btn-outline btn-gray flex-1 sm:flex-none"
                   >
                     Cancel
+                    <FaX className="text-xl"></FaX>
                   </button>
                   <button
                     onClick={handleSave}
                     className="btn btn-primary bg-gradient-to-r from-cyan-500 to-blue-600 border-none hover:from-cyan-600 hover:to-blue-700 text-white flex-1 sm:flex-none"
                   >
                     Save Changes
+                    <FaSave className="text-xl"></FaSave>
                   </button>
                 </>
               ) : (
@@ -190,6 +215,7 @@ const Profile = () => {
                   className="btn btn-primary bg-gradient-to-r from-cyan-500 to-blue-600 border-none hover:from-cyan-600 hover:to-blue-700 text-white"
                 >
                   Edit Profile
+                  <FaEdit className="text-xl"></FaEdit>
                 </button>
               )}
               <button
@@ -197,12 +223,16 @@ const Profile = () => {
                 className="btn btn-primary bg-gradient-to-r from-red-500 to-yellow-500 border-none hover:from-yellow-600 hover:to-red-500 text-white"
               >
                 Logout
+                <FaSignOutAlt className="text-xl" />
               </button>
             </div>
           </div>
         </div>
 
-        <div data-aos="fade-left" className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+        <div
+          data-aos="fade-left"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8"
+        >
           <div className="card bg-white shadow-lg border border-cyan-200">
             <div className="card-body text-center">
               <div className="text-3xl text-cyan-500 mb-2">🐕</div>

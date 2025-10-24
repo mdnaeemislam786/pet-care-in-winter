@@ -38,6 +38,7 @@ A modern, responsive web application designed to provide comprehensive winter ca
 - **AOS** - Scroll animations
 - **React Toastify** - Notification system
 - **Animate.css** - text animation
+- **React Icons** - Button and text icon
 
 ## 📦 Installation
 

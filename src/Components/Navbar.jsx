@@ -2,14 +2,25 @@ import React, { useContext, useState } from "react";
 import logo from "../assets/logo.png";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
+import { FaSignOutAlt } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
 
-  const { user } = useContext(AuthContext);
+  const { user, logOutUser } = useContext(AuthContext);
   const { photoURL, displayName } = user || {};
   const photo = photoURL;
+  const handleLogout = () => {
+    logOutUser()
+      .then(() => {
+        toast.success("Logout Successful");
+      })
+      .catch((error) => {
+        toast.error("Logout not Successful" + error.message);
+      });
+  };
 
   return (
     <nav className="navbar bg-gradient-to-r from-blue-100 via-white to-cyan-100 shadow-xl sticky top-0 z-50 border-b-2 border-orange-200">
@@ -56,23 +67,33 @@ const Navbar = () => {
               </NavLink>
 
               {user ? (
-                <NavLink
-                  to="/profile"
-                  className="flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-2 shadow-lg border border-orange-100 transition-all duration-300 hover:shadow-xl hover:scale-105 hover:bg-white"
-                  onMouseEnter={() => setHovered(true)}
-                  onMouseLeave={() => setHovered(false)}
-                >
-                  <h2 className="text-xl font-bold text-gray-800 hidden sm:block">
-                    {hovered ? displayName : "My profile"}
-                  </h2>
-                  <div className="w-12 h-12 rounded-full border-2 border-orange-300 overflow-hidden shadow-md">
-                    <img
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                      alt="Profile"
-                      src={photo}
-                    />
-                  </div>
-                </NavLink>
+                <>
+                  <NavLink
+                    to="/profile"
+                    className="flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-2xl px-4 py-2 shadow-lg border border-orange-100 transition-all duration-300 hover:shadow-xl hover:scale-105 hover:bg-white"
+                    onMouseEnter={() => setHovered(true)}
+                    onMouseLeave={() => setHovered(false)}
+                  >
+                    <h2 className="text-xl font-bold text-gray-800 hidden sm:block">
+                      {hovered ? displayName : "My profile"}
+                    </h2>
+                    <div className="w-12 h-12 rounded-full border-2 border-orange-300 overflow-hidden shadow-md">
+                      <img
+                        className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
+                        alt="Profile"
+                        src={photo}
+                      />
+                    </div>
+                  </NavLink>
+                  <button
+                    onClick={handleLogout}
+                    className="bg-red-500 m-0 px-2 py-3 rounded-xl flex border items-center"
+                  >
+                    <span>
+                      <FaSignOutAlt className="text-2xl" />
+                    </span>
+                  </button>
+                </>
               ) : (
                 <NavLink
                   to="/auth/login"
