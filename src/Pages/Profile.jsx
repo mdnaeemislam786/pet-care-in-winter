@@ -3,13 +3,16 @@ import { AuthContext } from "../Context/AuthContext";
 
 const Profile = () => {
   const { user, logOutUser, updateProfileUser } = use(AuthContext);
-
   const { email, photoURL, displayName, phoneNumber } = user || {};
 
   const handlelogOutUser = () => {
     logOutUser()
-      .then(()=>{alert("Logout Successful")})
-      .catch(() => {alert("Logout not Successful")});
+      .then(() => {
+        alert("Logout Successful");
+      })
+      .catch(() => {
+        alert("Logout not Successful");
+      });
   };
 
   const [userData, setUserData] = useState({
@@ -22,7 +25,6 @@ const Profile = () => {
 
   const [isEditing, setIsEditing] = useState(false);
   const [tempData, setTempData] = useState({ ...userData });
-
   const handleEdit = () => {
     setTempData({ ...userData });
     setIsEditing(true);
@@ -31,16 +33,21 @@ const Profile = () => {
   const handleSave = () => {
     const updateName = tempData.name;
     const updatePhoto = tempData.profilePicture;
-
-    updateProfileUser(updateName, updatePhoto)
-      .then(() => {
-        alert(" Profile updated");
-        setUserData({ ...tempData });
-        setIsEditing(false);
-      })
-      .catch((error) => {
-        alert("❌ Failed to update profile:", error.message);
-      });
+    // Name validation
+    if (updateName.length < 3 || updateName.length > 16) {
+      alert("Name must be between 3 and 16 characters.");
+      setIsEditing(false);
+    } else {
+      updateProfileUser(updateName, updatePhoto)
+        .then(() => {
+          alert(" Profile updated");
+          setUserData({ ...tempData });
+          setIsEditing(false);
+        })
+        .catch((error) => {
+          alert("❌ Failed to update profile:", error.message);
+        });
+    }
   };
 
   const handleCancel = () => {

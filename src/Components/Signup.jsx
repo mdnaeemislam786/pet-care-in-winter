@@ -1,29 +1,27 @@
 // import { createUserWithEmailAndPassword } from "firebase/auth/cordova";
-import { use, useState } from "react";
-import { Link, useNavigate ,useLocation} from "react-router";
 // import { auth } from "../Firebase/Firebase.config";
+import { use, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../Firebase/Firebase.config";
 
 const SignUp = () => {
+  
   const [passwordShown, setPasswordShown] = useState(false);
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const togglePasswordVisibility = () => setPasswordShown((cur) => !cur);
   const toggleConfirmPasswordVisibility = () =>
     setConfirmPasswordShown((cur) => !cur);
-
+  
   const provider = new GoogleAuthProvider();
-
-  const [error, setError] = useState("");
-
   const { createUser } = use(AuthContext);
 
   const location = useLocation();
   const navigate = useNavigate();
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,6 +29,7 @@ const SignUp = () => {
     const lastName = e.target.lastName.value;
     const Name = firstName + " " + lastName;
     const email = e.target.email.value;
+    const photo = e.target.photo.value;
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
 
@@ -48,17 +47,21 @@ const SignUp = () => {
       );
     }
 
+    // Name validation
+    if(Name.length < 3 || Name.length > 16){
+      return setError("Name must be between 3 and 16 characters.")
+    }
+
     // console.log(firstName, lastName, email, password, confirmPassword);
 
     setError("");
     // createUserWithEmailAndPassword(auth, email, password)
-    createUser(email, password, Name)
+    createUser(email, password, Name, photo)
       .then(() => {
         navigate(location.state || "/");
         alert(" Your account creates successfull");
       })
       .catch((error) => {
-        // console.log(error.message);
         setError(error.message);
       });
     // Simulate signup process
@@ -66,18 +69,17 @@ const SignUp = () => {
     setTimeout(() => setIsLoading(false), 2000);
   };
 
-
-    const handleGoogleLogin= () =>{
-      signInWithPopup(auth, provider)
+  const handleGoogleLogin = () => {
+    signInWithPopup(auth, provider)
       .then(() => {
         // console.log(result);
         navigate(location.state || "/");
-      }).catch((error) =>{
-        // console.log(error.message);
-        setError(error.message)
       })
-  
-    }
+      .catch((error) => {
+        // console.log(error.message);
+        setError(error.message);
+      });
+  };
   return (
     <div className="min-h-screen bg-transparent flex items-center justify-center p-8">
       <div className="card w-full max-w-2xl bg-base-100/90 backdrop-blur-md shadow-2xl border border-cyan-500/20">
@@ -129,6 +131,21 @@ const SignUp = () => {
               </div>
             </div>
 
+            {/* Photo URL */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text text-cyan-100 font-medium">
+                  Photo URL
+                </span>
+              </label>
+              <input
+                type="url"
+                name="photo"
+                placeholder="Photo URL"
+                className="input input-bordered w-full bg-slate-800/50 border-cyan-500/30 text-white placeholder-cyan-200/60 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20"
+                required
+              />
+            </div>
             {/* Email */}
             <div className="form-control">
               <label className="label">

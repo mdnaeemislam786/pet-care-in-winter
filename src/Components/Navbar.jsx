@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import logo from "../assets/logo.png";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Context/AuthContext";
-import defaultAvatar from "../assets/user-avater.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,12 +9,8 @@ const Navbar = () => {
 
   const { user } = useContext(AuthContext);
   const { photoURL, displayName } = user || {};
+  const photo = photoURL;
 
-  const photo = photoURL == false ? defaultAvatar : photoURL;
-
-  // console.log(photoURL, displayName);
-  // const user = use(AuthContext)
-  // console.log((user).user.email);
   return (
     <nav className="navbar bg-gradient-to-r from-blue-100 via-white to-cyan-100 shadow-xl sticky top-0 z-50 border-b-2 border-orange-200">
       <div className="container mx-auto px-4">
