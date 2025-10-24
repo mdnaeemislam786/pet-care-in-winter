@@ -17,7 +17,11 @@ const AuthProvider = ({ children }) => {
   const createUser = async (email, password, name, photo) => {
     setLoading(true);
     try {
-      const result = await createUserWithEmailAndPassword(auth, email, password);
+      const result = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       await updateProfile(result.user, {
         displayName: name,
         photoURL: photo,
@@ -39,8 +43,7 @@ const AuthProvider = ({ children }) => {
       });
       setUser(auth.currentUser);
       return auth.currentUser;
-    }
-     finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -52,8 +55,7 @@ const AuthProvider = ({ children }) => {
       const result = await signInWithEmailAndPassword(auth, email, password);
       setUser(result.user);
       return result.user;
-    }
-     finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -64,7 +66,7 @@ const AuthProvider = ({ children }) => {
     try {
       await signOut(auth);
       setUser(null);
-    }finally {
+    } finally {
       setLoading(false);
     }
   };
