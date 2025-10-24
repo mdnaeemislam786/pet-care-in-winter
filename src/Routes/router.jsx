@@ -8,6 +8,7 @@ import SignUp from "../Components/Signup";
 import Profile from "../Pages/Profile";
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "../Components/ForgotPassword";
+import ErrorPage from "../Components/ErrorPage";
 
 export const router = createBrowserRouter([
   {
@@ -54,7 +55,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "*",
-        element: <h1 className="text-center">Error 404</h1>,
+        element: <ErrorPage/>,
       },
     ],
   },

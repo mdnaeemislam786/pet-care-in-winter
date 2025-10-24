@@ -1,5 +1,6 @@
 import { use, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const { user, logOutUser, updateProfileUser } = use(AuthContext);
@@ -8,10 +9,10 @@ const Profile = () => {
   const handlelogOutUser = () => {
     logOutUser()
       .then(() => {
-        alert("Logout Successful");
+        toast.success("Logout Successful");
       })
-      .catch(() => {
-        alert("Logout not Successful");
+      .catch((error) => {
+        toast.error("Logout not Successful" + error.message);
       });
   };
 
@@ -35,17 +36,17 @@ const Profile = () => {
     const updatePhoto = tempData.profilePicture;
     // Name validation
     if (updateName.length < 3 || updateName.length > 16) {
-      alert("Name must be between 3 and 16 characters.");
+      toast.error("Name must be between 3 and 16 characters.");
       setIsEditing(false);
     } else {
       updateProfileUser(updateName, updatePhoto)
         .then(() => {
-          alert(" Profile updated");
+          toast.success(" Profile updated successful");
           setUserData({ ...tempData });
           setIsEditing(false);
         })
         .catch((error) => {
-          alert("❌ Failed to update profile:", error.message);
+          toast.error("❌ Failed to update profile:", error.message);
         });
     }
   };
@@ -120,7 +121,7 @@ const Profile = () => {
                     className="text-3xl font-bold bg-transparent border-b-2 border-cyan-500 focus:outline-none focus:border-cyan-700 text-gray-800 text-center md:text-left w-full"
                   />
                 ) : (
-                  <h2 className="text-3xl font-bold text-gray-800">
+                  <h2 className="text-3xl animate__animated animate__fadeInUp font-bold text-gray-800">
                     {userData.name}
                   </h2>
                 )}
@@ -132,7 +133,7 @@ const Profile = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 animate__animated animate__fadeInUp md:grid-cols-2 gap-6">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text text-gray-700 font-semibold">
@@ -167,7 +168,7 @@ const Profile = () => {
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-between mt-8 pt-6 border-t border-gray-200">
+            <div className="flex flex-col animate__animated animate__fadeInUp sm:flex-row gap-4 justify-between mt-8 pt-6 border-t border-gray-200">
               {isEditing ? (
                 <>
                   <button

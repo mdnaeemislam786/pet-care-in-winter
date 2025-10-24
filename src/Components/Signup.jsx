@@ -5,6 +5,7 @@ import { Link, useNavigate, useLocation } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../Firebase/Firebase.config";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   
@@ -59,7 +60,7 @@ const SignUp = () => {
     createUser(email, password, Name, photo)
       .then(() => {
         navigate(location.state || "/");
-        alert(" Your account creates successfull");
+        toast.success(" Your account creates successfull");
       })
       .catch((error) => {
         setError(error.message);
@@ -74,6 +75,7 @@ const SignUp = () => {
       .then(() => {
         // console.log(result);
         navigate(location.state || "/");
+        toast.success("Account create successful!");
       })
       .catch((error) => {
         // console.log(error.message);

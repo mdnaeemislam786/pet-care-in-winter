@@ -1,3 +1,5 @@
+import { toast } from "react-toastify";
+
 const BookService = () => {
   const services = [
     "Winter Coat Fitting for Dogs",
@@ -10,7 +12,7 @@ const BookService = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
    const option = e.target.service.value;
-    alert(option + " Service Booked")
+    toast.success(option + " Service Booked")
     e.target.reset(); 
   };
 

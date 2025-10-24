@@ -1,16 +1,46 @@
-# React + Vite
+# 🐾 WarmPaws - Winter Pet Care Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive web application designed to provide comprehensive winter care services for pets. Built with React, Tailwind CSS, and Firebase to ensure pets stay warm, safe, and healthy during the cold months.
 
-Currently, two official plugins are available:
+**Live Link:** https://warm-paws-bd.netlify.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+### 🎯 Core Functionality
+- **🔐 User Authentication** - Secure login/signup with Firebase Auth
+- **🐕 Pet Service Booking** - winter care services
+- **👤 User Profiles** - Manage personal profile
+- **📱 Responsive Design** - Optimized for all devices
+- **🎨 Modern UI/UX** - Beautiful winter-themed interface
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### ❄️ Winter-Specific Features
+- Winter coat fitting services
+- Paw protection treatments
+- Indoor warm bed setups
+- Cold weather nutrition consultation
+- Emergency winter vet care
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Frontend
+- **React** - Latest React with concurrent features
+- **Vite** - Fast build tool and dev server
+- **Tailwind CSS** - Utility-first CSS framework
+- **DaisyUI** - Component library for Tailwind CSS
+
+### Backend & Auth
+- **Firebase 12** - Backend services and authentication
+- **Firebase Auth** - User management and security
+
+### Additional Libraries
+- **React Router DOM** - Client-side routing
+- **Swiper** - Modern slider/carousel
+- **AOS** - Scroll animations
+- **React Toastify** - Notification system
+- **Animate.css** - text animation
+
+## 📦 Installation
+
+### Prerequisites
+- Node.js
+- npm

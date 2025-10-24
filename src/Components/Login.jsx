@@ -3,6 +3,7 @@ import { use, useRef, useState } from "react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { auth } from "../Firebase/Firebase.config";
 import { AuthContext } from "../Context/AuthContext";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -25,6 +26,7 @@ const Login = () => {
     loginUser(email, password)
     .then(() =>{
       // console.log(result);
+      toast.success("Login successful")
         navigate(location.state || "/");
     })
     .catch((error) =>{
@@ -45,6 +47,7 @@ const Login = () => {
     signInWithPopup(auth, provider)
     .then(() => {
         navigate(location.state || "/");
+        toast.success(" Login successful")
       // console.log(result);
     }).catch((error) =>{
       // console.log(error.message);

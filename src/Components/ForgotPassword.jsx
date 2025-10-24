@@ -1,12 +1,14 @@
 import { useRef, useState } from "react";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../Firebase/Firebase.config";
+import { useNavigate } from "react-router";
 
 const ForgotPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const emailRef = useRef('');
+  const navigate = useNavigate();
 
   const handleForgotPassword = (e) => {
     e.preventDefault();
@@ -24,7 +26,10 @@ const ForgotPassword = () => {
     sendPasswordResetEmail(auth, email)
       .then(() => {
         setSuccess("Password reset email sent! Please check your inbox.");
+        
         emailRef.current.value = "";
+        navigate("/auth/login")
+        window.open("https://mail.google.com", "_blank");
       })
       .catch((error) => {
         setError(error.message);
